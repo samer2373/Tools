@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Convert Under Score to Upper Case</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div align="center">
+      <h2>Input</h2>
+      <textarea id="input" onChange="doConvert()" rows="6" cols="50"></textarea>
+
+      <hr />
+
+      <button
+        onClick="doConvert()"
+        class="btn btn-info"
+        style="margin-top: 10px;"
+      >
+        Convert
+      </button>
+
+      <input type="checkbox" id="with_ext" name="with_ext" value="with_ext" />
+      <label for="with_ext">With Extention</label>
+      <h2>Output</h2>
+      <textarea id="output" rows="6" cols="50"></textarea>
+      <hr />
+      <button onClick="copy()" class="btn btn-info" style="margin-top: 10px;">
+        Copy
+      </button>
+    </div>
+    <script type="text/javascript">
+      var input = document.getElementById('input')
+      var with_ext = document.getElementById('with_ext')
+      input.addEventListener('input', doConvert)
+      with_ext.addEventListener('input', doConvert)
+      function doConvert() {
+        var value = input.value
+        var ext = with_ext.checked ? '.dart' : ''
+
+        var text1 = value.replace(/\B[A-Z]\B/g, ' $&')
+        var text2 = text1.toLowerCase().replace(/ /g, '_')
+        text2 = text2 + ext
+
+        document.getElementById('output').value = text2
+      }
+      //////////////////////////////
+      function copy() {
+        // Get the text field
+        var copyText = document.getElementById('output')
+
+        // Select the text field
+        copyText.select()
+        copyText.setSelectionRange(0, 99999) // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value)
+
+        // Alert the copied text
+        // alert('Copied the text: ' + copyText.value)
+      }
+    </script>
+  </body>
+</html>
